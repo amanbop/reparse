@@ -23,6 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
+```ruby
 parser = Reparse.new
 parser.input_text = 'Our customer is an important agtech startup looking for developers to join their journey to change farming.
 
@@ -63,7 +64,7 @@ puts parsed_text
 =================
 
 {"management"=>3, "concept"=>2, "Understanding"=>2, "eg"=>2, "practices"=>2, "latest"=>2, "up"=>2, "CSS"=>2, "skills"=>2, "Good"=>2, "it"=>1, "how"=>1, "Kanban"=>1, "what"=>1, "know"=>1, "You"=>1, "KISS"=>1, "code"=>1, "documented"=>1, "well"=>1, "simple"=>1, "clean"=>1, "Appreciation"=>1, "pipelines"=>1, "CI/CD"=>1, "Flow"=>1, "Github"=>1, "Git"=>1, "Proficiency"=>1, "tests"=>1, "unit"=>1, "platforms"=>1, "testing"=>1, "implementing"=>1, "Experience"=>1, "Tailwindcss"=>1, "Sass"=>1, "languages/syntaxes/libraries"=>1, "associated"=>1, "bundlers"=>1, "frameworks"=>1, "preprocessors"=>1, "Familiarity"=>1, "Linux"=>1, "basic"=>1, "environment"=>1, "relevant"=>1, "deployment"=>1, "Server"=>1, "PostgresSQL"=>1, "Especially"=>1, "being"=>1, "including"=>1, "design"=>1, "Database"=>1, "minimum"=>1, "6"=>1, "ECMAScript"=>1, "CSS3"=>1, "HTML5"=>1, "must"=>1, "Being"=>1, "Typescript"=>1, "Ideally"=>1, "JavaScript"=>1, "HTML"=>1, "Writing"=>1, "recoil"=>1, "or"=>1, "MST"=>1, "Mobx"=>1, "like"=>1, "libraries"=>1, "state"=>1, "React"=>1, "backend"=>1, "Rails"=>1, "Ruby"=>1, "experience"=>1, "written"=>1, "spoken"=>1, "English"=>1, "Requirements"=>1, "farming"=>1, "change"=>1, "journey"=>1, "their"=>1, "join"=>1, "developers"=>1, "looking"=>1, "startup"=>1, "agtech"=>1, "important"=>1, "customer"=>1}
-
+```
 
 ## Development
 
