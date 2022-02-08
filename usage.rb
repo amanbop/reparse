@@ -1,6 +1,10 @@
 require './lib/reparse.rb'
-parser = Reparse.new
-parser.input_text = 'Our customer is an important agtech startup looking for developers to join their journey to change farming.
+parser = Reparse::Reparse.new
+parser.input_text = 'Our customer is an important'
+
+=begin
+
+'agtech startup looking for developers to join their journey to change farming.
 
 Requirements:
 
@@ -28,12 +32,15 @@ Appreciation for clean, simple and well documented code. Understanding of the KI
 
 You know what a Kanban is and how to use it.';
 
+=end
+
 parser.word_scrub_list = ['use']
 parser.punctuation_scrub_list = ['|']
 
-parsed_text = parser.parse
+parser.load_search_terms
 
-puts parsed_text
+# parsed_text = parser.parse
+# puts parsed_text
 
 
 

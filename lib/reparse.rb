@@ -25,6 +25,65 @@ module Reparse
 
     end
 
+
+    def split_term_before(term_to_split, separator )
+        first_term=term_to_split.split(separator).first.strip
+    end
+
+    def split_term_after(term_to_split, separator )
+        first_term=term_to_split.split(separator).last.strip
+    end
+
+    def load_search_terms
+
+        computer_languages_file_path = File.expand_path('../../search_terms/computer_languages.txt', __FILE__)
+        computer_languages = File.readlines(computer_languages_file_path).map{|x| x.strip}
+        # puts computer_languages.to_s
+        computer_languages.each_with_index do |v,k|
+            puts "#{k} : #{v}"
+            if v.include?('(')
+
+                separator='('
+                puts "#{k} : #{v}"
+                new_term_before_separator = split_term_before(v,separator)
+                puts "new_term_before_separator:#{new_term_before_separator}"
+                computer_languages[k]=new_term_before_separator
+                puts "#{k} : #{computer_languages[k]}"
+                new_term_after_separator=split_term_after(v,separator)
+
+                separator=')'
+                new_term_after_separator=split_term_before(new_term_after_separator,separator)
+                puts "new_term_after_separator:#{new_term_after_separator}"
+                computer_languages.push(new_term_after_separator)
+                puts computer_languages.last
+            end
+            if v.include?('–')
+                
+                separator='–'
+                puts "#{k} : #{v}"
+                new_term_before_separator = split_term_before(v,separator)
+                puts "new_term_before_separator:#{new_term_before_separator}"
+                computer_languages[k]=new_term_before_separator
+                puts "#{k} : #{computer_languages[k]}"
+                new_term_after_separator=split_term_after(v,separator)
+
+                separator='–'
+                new_term_after_separator=split_term_before(new_term_after_separator,separator)
+                puts "new_term_after_separator:#{new_term_after_separator}"
+                computer_languages.push(new_term_after_separator)
+                puts computer_languages.last
+            end
+
+        end
+        # puts File.expand_path('../../search_terms/*.txt', __FILE__)
+        # puts Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].to_s
+        # Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].each do |file|
+        #     puts File.basename(file,".txt")
+        #   end
+    end
+
+
+
     private
 
     def check_input_text
@@ -96,8 +155,8 @@ module Reparse
 
         # Sort the word hash in descending order
         word_count =  word_hash.sort_by{ |k, v| v }.reverse.to_h 
-
     end        
+
 
   end
 
