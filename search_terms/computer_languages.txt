@@ -711,3 +711,34 @@ Zig
 ZOPL
 ZPL
 Z++
+Cascading Style Sheets (CSS)
+Document Style Semantics and Specification Language (DSSSL)
+Extensible Stylesheet Language (XSL)
+JavaScript Style Sheets (JSSS)
+Formatting Output Specification Instance (FOSI)
+Syntactically Awesome Stylesheets (Sass)
+Less (Less)
+Stylus
+SMIL Timesheets
+BNML (Business Narrative Markup Language) [1]
+BPML (Business Process Modeling Language) [2]
+FpML (Financial Product Markup Language)
+XBRL (eXtensible Business Reporting Language)
+BulletML
+OBML (Opera Binary Markup Language)
+SMIL (Synchronized Multimedia Integration Language)
+Fountain
+CFML (ColdFusion Markup Language)
+Emotion Markup Language
+GolfML [3]
+InkML
+Meta Content Framework
+Parameter Value Language
+Serializations of RDF (Resource Description Framework) like RDF/XML and RDF/N3
+SBML (Systems Biology Markup Language)
+SML (Spacecraft Markup Language)
+VoiceXML
+VHML (Virtual Human Markup Language)
+XBEL (XML Bookmark Exchange Language) [4]
+XBL (eXtensible Bindings Language)
+XMPP (Extensible Messaging and Presence Protocol)

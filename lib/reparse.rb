@@ -36,50 +36,56 @@ module Reparse
 
     def load_search_terms
 
-        computer_languages_file_path = File.expand_path('../../search_terms/computer_languages.txt', __FILE__)
-        computer_languages = File.readlines(computer_languages_file_path).map{|x| x.strip}
-        # puts computer_languages.to_s
-        computer_languages.each_with_index do |v,k|
-            puts "#{k} : #{v}"
-            if v.include?('(')
+         search_terms_file_path = File.expand_path('../../search_terms/', __FILE__)
+         search_terms = []
+         puts "search_terms_file_path : " + search_terms_file_path
+        Dir.foreach(search_terms_file_path) do |filename|
+            next if filename == '.' or filename == '..'
+            filepath = "#{search_terms_file_path}/#{filename}"
+            temp_search_terms = File.readlines(filepath).map{|x| x.strip}
+            temp_search_terms.each_with_index do |v,k|
+                # puts "#{k} : #{v}"
+                if v.include?('(')
 
-                separator='('
-                puts "#{k} : #{v}"
-                new_term_before_separator = split_term_before(v,separator)
-                puts "new_term_before_separator:#{new_term_before_separator}"
-                computer_languages[k]=new_term_before_separator
-                puts "#{k} : #{computer_languages[k]}"
-                new_term_after_separator=split_term_after(v,separator)
+                    separator='('
+                    # puts "#{k} : #{v}"
+                    new_term_before_separator = split_term_before(v,separator)
+                    # puts "new_term_before_separator:#{new_term_before_separator}"
+                    temp_search_terms[k]=new_term_before_separator
+                    # puts "#{k} : #{temp_search_terms[k]}"
+                    new_term_after_separator=split_term_after(v,separator)
 
-                separator=')'
-                new_term_after_separator=split_term_before(new_term_after_separator,separator)
-                puts "new_term_after_separator:#{new_term_after_separator}"
-                computer_languages.push(new_term_after_separator)
-                puts computer_languages.last
-            end
-            if v.include?('–')
-                
-                separator='–'
-                puts "#{k} : #{v}"
-                new_term_before_separator = split_term_before(v,separator)
-                puts "new_term_before_separator:#{new_term_before_separator}"
-                computer_languages[k]=new_term_before_separator
-                puts "#{k} : #{computer_languages[k]}"
-                new_term_after_separator=split_term_after(v,separator)
+                    separator=')'
+                    new_term_after_separator=split_term_before(new_term_after_separator,separator)
+                    # puts "new_term_after_separator:#{new_term_after_separator}"
+                    temp_search_terms.push(new_term_after_separator)
+                    # puts temp_search_terms.last
+                end
+                if v.include?('–')
+                    
+                    separator='–'
+                    # puts "#{k} : #{v}"
+                    new_term_before_separator = split_term_before(v,separator)
+                    # puts "new_term_before_separator:#{new_term_before_separator}"
+                    temp_search_terms[k]=new_term_before_separator
+                    # puts "#{k} : #{temp_search_terms[k]}"
+                    new_term_after_separator=split_term_after(v,separator)
 
-                separator='–'
-                new_term_after_separator=split_term_before(new_term_after_separator,separator)
-                puts "new_term_after_separator:#{new_term_after_separator}"
-                computer_languages.push(new_term_after_separator)
-                puts computer_languages.last
-            end
-
-        end
+                    separator='–'
+                    new_term_after_separator=split_term_before(new_term_after_separator,separator)
+                    # puts "new_term_after_separator:#{new_term_after_separator}"
+                    temp_search_terms.push(new_term_after_separator)
+                    # puts temp_search_terms.last
+                end
+            end #temp_search_terms.each_with_index do |v,k|
+            search_terms = search_terms + temp_search_terms
+        end #Dir.foreach(search_terms_file_path) do |filename|
         # puts File.expand_path('../../search_terms/*.txt', __FILE__)
         # puts Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].to_s
         # Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].each do |file|
         #     puts File.basename(file,".txt")
         #   end
+        search_terms.each_with_index{|v,k| puts "#{k} : #{v}" }
     end
 
 
