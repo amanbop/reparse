@@ -13,15 +13,23 @@ module Reparse
         
         check_input_text
 
-        set_word_scrub_list
+        search_terms_list = load_search_terms
+        puts search_terms_list.count
+
+        word_hash = scan_for_search_terms(@input_text, search_terms_list)
+
+        # word_hash.each_with_index{|v,k| puts "#{k} : #{v}" }
+
+
+        # set_word_scrub_list
     
-        set_punc_scrub_list
+        # set_punc_scrub_list
 
-        remove_punc_marks
+        # remove_punc_marks
 
-        word_list = remove_scrub_words
+        # word_list = remove_scrub_words
 
-        word_hash = count_words(word_list)
+        # word_hash = count_words(word_list)
 
     end
 
@@ -64,7 +72,7 @@ module Reparse
                 if v.include?('–')
                     
                     separator='–'
-                    # puts "#{k} : #{v}"
+                    puts "#{k} : #{v}"
                     new_term_before_separator = split_term_before(v,separator)
                     # puts "new_term_before_separator:#{new_term_before_separator}"
                     temp_search_terms[k]=new_term_before_separator
@@ -85,7 +93,8 @@ module Reparse
         # Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].each do |file|
         #     puts File.basename(file,".txt")
         #   end
-        search_terms.each_with_index{|v,k| puts "#{k} : #{v}" }
+        # search_terms.each_with_index{|v,k| puts "#{k} : #{v}" }
+        search_terms
     end
 
 
@@ -132,6 +141,23 @@ module Reparse
             @scrubbed_text = @scrubbed_text.gsub(punc_mark, '')
         end
     end    
+
+
+    def count_em(count_in_str, substr)
+        count_in_str.scan(/(?<!\w)#{Regexp.escape(substr)}(?!\w)/).count
+    end
+      
+    def scan_for_search_terms(input_text, terms_list)
+        terms_count = {}
+        input_text = input_text.downcase
+        terms_list.each do |term|
+            puts term
+            n_count = count_em(input_text,term.downcase)
+            puts n_count
+            terms_count[term]  = n_count if n_count > 0
+        end
+        terms_count = terms_count.sort_by{ |k, v| v }.reverse.to_h
+    end
     
     def remove_scrub_words
 

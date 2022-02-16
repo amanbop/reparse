@@ -557,6 +557,8 @@ RPL
 RSL
 RTL/2
 Ruby
+Ruby on Rails
+Rails
 Rust
 S
 S2
