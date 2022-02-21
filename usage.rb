@@ -2,7 +2,7 @@ require './lib/reparse.rb'
 parser = Reparse::Reparse.new
 # parser.input_text = 'Our customer is an important'
 
-parser.input_text ='agtech startup looking for developers to join their journey to change farming.
+parser.input_text ='Agtech startup looking for developers to join their journey to change farming.
 
 Requirements:
 
@@ -28,7 +28,7 @@ Understanding of the concept of CI/CD pipelines.
 
 Appreciation for clean, simple and well documented code. Understanding of the KISS concept.
 
-You know what a Kanban is and how to use it. X10, XBL Ruby on Rails';
+You know what a Kanban is and how to use it. X10, XBL Ruby on Rails Text Executive Programming Language';
 
 
 # parser.word_scrub_list = ['use']
@@ -39,6 +39,4 @@ You know what a Kanban is and how to use it. X10, XBL Ruby on Rails';
  parsed_text = parser.parse
  puts parsed_text
 
-
-
-
+ parser.compare_hashes(parsed_text,parsed_text)

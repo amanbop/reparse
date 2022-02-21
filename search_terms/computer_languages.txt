@@ -744,3 +744,9 @@ VHML (Virtual Human Markup Language)
 XBEL (XML Bookmark Exchange Language) [4]
 XBL (eXtensible Bindings Language)
 XMPP (Extensible Messaging and Presence Protocol)
+state management libraries
+Mobx
+MST
+recoil
+HTML
+CI/CD

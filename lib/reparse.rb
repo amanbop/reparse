@@ -33,7 +33,6 @@ module Reparse
 
     end
 
-
     def split_term_before(term_to_split, separator )
         first_term=term_to_split.split(separator).first.strip
     end
@@ -46,7 +45,7 @@ module Reparse
 
          search_terms_file_path = File.expand_path('../../search_terms/', __FILE__)
          search_terms = []
-         puts "search_terms_file_path : " + search_terms_file_path
+         #puts "search_terms_file_path : " + search_terms_file_path
         Dir.foreach(search_terms_file_path) do |filename|
             next if filename == '.' or filename == '..'
             filepath = "#{search_terms_file_path}/#{filename}"
@@ -97,7 +96,34 @@ module Reparse
         search_terms
     end
 
+    def compare_hashes(h1,h2)
+    hash_similarity = 0       
+    element_similarity = 0
+    h1_length = h1.length
+    h2_length = h2.length
 
+    puts 'compare hashes'
+    puts "h1.length: #{h1_length} , #{h1.class}"
+    puts "h2.length: #{h2_length}"
+
+    
+        h1.each_with_index do |(key,value),index|
+            puts "#{index} : #{key} : #{value}" 
+
+            if !(h2[key].nil?)
+
+                if  h2[key] >= value
+                    element_similarity = 1
+                else
+                    element_similarity = (h2[key] / value ).round(2)
+                end #h2[k] == v
+                hash_similarity = hash_similarity + element_similarity
+                element_similarity = 0    
+
+            end #!(h2[k].nil?)
+        end
+        puts "similarity: #{hash_similarity}"
+    end
 
     private
 
@@ -151,9 +177,9 @@ module Reparse
         terms_count = {}
         input_text = input_text.downcase
         terms_list.each do |term|
-            puts term
+            # puts term
             n_count = count_em(input_text,term.downcase)
-            puts n_count
+            # puts n_count
             terms_count[term]  = n_count if n_count > 0
         end
         terms_count = terms_count.sort_by{ |k, v| v }.reverse.to_h
