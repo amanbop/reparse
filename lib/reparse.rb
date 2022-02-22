@@ -97,32 +97,20 @@ module Reparse
     end
 
     def compare_hashes(h1,h2)
-    hash_similarity = 0       
-    element_similarity = 0
     h1_length = h1.length
     h2_length = h2.length
-
     puts 'compare hashes'
     puts "h1.length: #{h1_length} , #{h1.class}"
     puts "h2.length: #{h2_length}"
 
-    
-        h1.each_with_index do |(key,value),index|
-            puts "#{index} : #{key} : #{value}" 
 
-            if !(h2[key].nil?)
+    if h2_length > h1_length
+        hash_similarity = compare_hash_elements(h2,h1)
+    else
+        hash_similarity = compare_hash_elements(h1,h2)
+    end
 
-                if  h2[key] >= value
-                    element_similarity = 1
-                else
-                    element_similarity = (h2[key] / value ).round(2)
-                end #h2[k] == v
-                hash_similarity = hash_similarity + element_similarity
-                element_similarity = 0    
-
-            end #!(h2[k].nil?)
-        end
-        puts "similarity: #{hash_similarity}"
+        puts "hash_similarity: #{hash_similarity}"
     end
 
     private
@@ -213,7 +201,39 @@ module Reparse
 
         # Sort the word hash in descending order
         word_count =  word_hash.sort_by{ |k, v| v }.reverse.to_h 
-    end        
+    end   
+    
+    def compare_hash_elements(h1,h2)
+        #h1 is longer of the two hashes
+        hash_similarity = 0       
+        element_similarity = 0
+        h1_length = h1.length
+        
+            h1.each_with_index do |(key,value),index|
+                puts "#{index} : #{key} : #{value}" 
+    
+                if h2[key].nil?
+                    element_similarity = 0
+                else
+                    if  h2[key] >= value
+                        element_similarity = 1
+                    else
+                        element_similarity = (h2[key] / value ).round(2)
+                    end #h2[k] == v
+                end #h2[key].nil?
+                    puts "element_similarity : #{element_similarity}"
+                    puts "hash_similarity : #{hash_similarity}"
+                    hash_similarity = hash_similarity + element_similarity
+            end
+            puts "hash_similarity : #{hash_similarity}"
+
+            hash_similarity_pecent = (( hash_similarity.to_f / h1_length.to_f ) * 100 ).round
+
+            puts "hash_similarity_pecent : #{hash_similarity_pecent}"
+            
+    return hash_similarity_pecent
+    end
+    
 
 
   end

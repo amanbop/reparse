@@ -36,7 +36,13 @@ You know what a Kanban is and how to use it. X10, XBL Ruby on Rails Text Executi
 
 # parser.load_search_terms
 
- parsed_text = parser.parse
- puts parsed_text
+ #parsed_text2 = parsed_text = parser.parse
+parsed_text = {"CSS"=>2, "Rails"=>2, "Ruby on Rails"=>2, "Ruby"=>2, "E"=>2, "Sass"=>1, "Text Executive Programming Language"=>1, "programming language"=>1, "CI/CD"=>1, "HTML"=>1, "recoil"=>1, "MST"=>1, "Mobx"=>1, "state management libraries"=>1, "XBL"=>1, "X10"=>1, "TypeScript"=>1, "SiMPLE"=>1, "Pipelines"=>1, "JavaScript"=>1, "ECMAScript"=>1, "Clean"=>1, "BASIC"=>1}
+#parsed_text2= {"Rails"=>2, "Ruby on Rails"=>2, "Ruby"=>2, "E"=>2, "Sass"=>1, "Text Executive Programming Language"=>1, "programming language"=>1, "CI/CD"=>1, "HTML"=>1, "recoil"=>1, "MST"=>1, "Mobx"=>1, "state management libraries"=>1, "XBL"=>1, "X10"=>1, "TypeScript"=>1, "SiMPLE"=>1, "Pipelines"=>1, "JavaScript"=>1, "ECMAScript"=>1, "Clean"=>1, "BASIC"=>1}
+parsed_text2= {"Ruby"=>2, "E"=>2, "Sass"=>1, "Text Executive Programming Language"=>1, "programming language"=>1, "CI/CD"=>1, "HTML"=>1, "recoil"=>1, "MST"=>1, "Mobx"=>1, "state management libraries"=>1, "XBL"=>1, "X10"=>1, "TypeScript"=>1, "SiMPLE"=>1, "Pipelines"=>1, "JavaScript"=>1}
 
- parser.compare_hashes(parsed_text,parsed_text)
+ puts parsed_text
+ puts '++++++++++++'
+ puts parsed_text2
+
+ parser.compare_hashes(parsed_text,parsed_text2)
