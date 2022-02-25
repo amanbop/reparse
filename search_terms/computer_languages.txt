@@ -436,7 +436,7 @@ NSIS
 Nu
 NWScript
 NXT-G
-o:XML
+XML
 Oak
 Oberon
 OBJ2
@@ -750,3 +750,4 @@ MST
 recoil
 HTML
 CI/CD
+RubyGems
