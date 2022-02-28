@@ -45,63 +45,43 @@ module Reparse
 
          search_terms_file_path = File.expand_path('../../search_terms/', __FILE__)
          search_terms = []
-         #puts "search_terms_file_path : " + search_terms_file_path
         Dir.foreach(search_terms_file_path) do |filename|
             next if filename == '.' or filename == '..'
             filepath = "#{search_terms_file_path}/#{filename}"
             temp_search_terms = File.readlines(filepath).map{|x| x.strip}
             temp_search_terms.each_with_index do |v,k|
-                # puts "#{k} : #{v}"
                 if v.include?('(')
 
                     separator='('
-                    # puts "#{k} : #{v}"
                     new_term_before_separator = split_term_before(v,separator)
-                    # puts "new_term_before_separator:#{new_term_before_separator}"
                     temp_search_terms[k]=new_term_before_separator
-                    # puts "#{k} : #{temp_search_terms[k]}"
                     new_term_after_separator=split_term_after(v,separator)
 
                     separator=')'
                     new_term_after_separator=split_term_before(new_term_after_separator,separator)
-                    # puts "new_term_after_separator:#{new_term_after_separator}"
                     temp_search_terms.push(new_term_after_separator)
-                    # puts temp_search_terms.last
                 end
                 if v.include?('–')
                     
                     separator='–'
                     puts "#{k} : #{v}"
                     new_term_before_separator = split_term_before(v,separator)
-                    # puts "new_term_before_separator:#{new_term_before_separator}"
                     temp_search_terms[k]=new_term_before_separator
-                    # puts "#{k} : #{temp_search_terms[k]}"
                     new_term_after_separator=split_term_after(v,separator)
 
                     separator='–'
                     new_term_after_separator=split_term_before(new_term_after_separator,separator)
-                    # puts "new_term_after_separator:#{new_term_after_separator}"
                     temp_search_terms.push(new_term_after_separator)
-                    # puts temp_search_terms.last
                 end
             end #temp_search_terms.each_with_index do |v,k|
             search_terms = search_terms + temp_search_terms
         end #Dir.foreach(search_terms_file_path) do |filename|
-        # puts File.expand_path('../../search_terms/*.txt', __FILE__)
-        # puts Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].to_s
-        # Dir[File.expand_path('../../search_terms/*.txt', __FILE__)].each do |file|
-        #     puts File.basename(file,".txt")
-        #   end
-        # search_terms.each_with_index{|v,k| puts "#{k} : #{v}" }
         search_terms
     end
 
     def compare_hashes(h1,h2)
         h1_length = h1.length
         h2_length = h2.length
-        # puts 'compare hashes'
-        # puts "h1.length: #{h1_length} , #{h1.class}"
-        # puts "h2.length: #{h2_length}"
 
 
         if h2_length > h1_length
@@ -110,7 +90,6 @@ module Reparse
             hash_similarity = compare_hash_elements(h1,h2)
         end
 
-            # puts "hash_similarity: #{hash_similarity}"
             return hash_similarity
     end
 
@@ -166,9 +145,7 @@ module Reparse
         terms_count = {}
         input_text = input_text.downcase
         terms_list.each do |term|
-            # puts term
             n_count = count_em(input_text,term.downcase)
-            # puts n_count
             terms_count[term]  = n_count if n_count > 0
         end
         terms_count = terms_count.sort_by{ |k, v| v }.reverse.to_h
@@ -212,7 +189,6 @@ module Reparse
         h1_length = h1.length
         
             h1.each_with_index do |(key,value),index|
-                # puts "#{index} : #{key} : #{value}" 
     
                 if h2[key].nil?
                     element_similarity = 0
@@ -223,18 +199,11 @@ module Reparse
                         element_similarity = (h2[key].to_f / value.to_f ).round(2)
                     end #h2[k] == v
                 end #h2[key].nil?
-                    # puts "element_similarity : #{element_similarity}"
-                    # puts "hash_similarity : #{hash_similarity}"
                     similarity_hash[key] = element_similarity
                     hash_similarity = hash_similarity + element_similarity
             end
-            # puts "hash_similarity : #{hash_similarity} out of #{h1_length}"
 
-            hash_similarity_pecent = (( hash_similarity.to_f / h1_length.to_f ) * 100 ).round(2)
-
-            # puts "hash_similarity_pecent : #{hash_similarity_pecent}"
-            # puts "similarity_hash : #{similarity_hash}"
-            
+            hash_similarity_pecent = (( hash_similarity.to_f / h1_length.to_f ) * 100 ).round(2)           
             
     return hash_similarity_pecent, similarity_hash
     end
