@@ -14,7 +14,7 @@ module Reparse
         check_input_text
 
         search_terms_list = load_search_terms
-        puts search_terms_list.count
+        # puts search_terms_list.count
 
         word_hash = scan_for_search_terms(@input_text, search_terms_list)
 
@@ -64,7 +64,6 @@ module Reparse
                 if v.include?('–')
                     
                     separator='–'
-                    puts "#{k} : #{v}"
                     new_term_before_separator = split_term_before(v,separator)
                     temp_search_terms[k]=new_term_before_separator
                     new_term_after_separator=split_term_after(v,separator)
