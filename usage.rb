@@ -1,4 +1,4 @@
-require './lib/reparse.rb'
+require 'reparse'
 parser = Reparse::Reparse.new
 
 parser.input_text ='Agtech startup looking for developers to join their journey to change farming.
